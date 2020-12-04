@@ -21,10 +21,10 @@ console.log(result);
     and append the returned markup to the DOM as a child of .cards
 */
 const entryPoint = document.querySelector('.cards');
-function friendCardMaker(result){
+function friendCardMaker({avatar_url}){
 const card = document.createElement('div');
 const image = document.createElement('img');
-image.setAttribute('src', 'result.data.avatar_url');
+image.src = avatar_url;
 card.appendChild(image);
 return card;
 }
@@ -33,6 +33,7 @@ axios.get('https://api.github.com/users/linds-fonnes')
 .then(result => {
   const myCard = friendCardMaker(result.data);
   entryPoint.appendChild(myCard);
+  console.log(myCard);
 })
 .catch(err => console.log(err));
 

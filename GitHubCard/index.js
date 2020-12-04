@@ -1,8 +1,12 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+const result = axios.get('https://api.github.com/users/linds-fonnes');
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -11,11 +15,26 @@
 
     Skip to STEP 3.
 */
-
+console.log(result);
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
 */
+const entryPoint = document.querySelector('.cards');
+function friendCardMaker(result){
+const card = document.createElement('div');
+const image = document.createElement('img');
+image.setAttribute('src', 'result.data.avatar_url');
+card.appendChild(image);
+return card;
+}
+
+axios.get('https://api.github.com/users/linds-fonnes')
+.then(result => {
+  const myCard = friendCardMaker(result.data);
+  entryPoint.appendChild(myCard);
+})
+.catch(err => console.log(err));
 
 /*
   STEP 5: Now that you have your own card getting added to the DOM, either
